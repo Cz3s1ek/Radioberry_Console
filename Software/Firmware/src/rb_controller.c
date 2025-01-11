@@ -136,12 +136,12 @@ void ENC1_Handler() {
     // Count the pulses
     pulse_count += s;
 
-    // React only when the counter reaches 10 or -10
-    if (pulse_count >= 10) {
+    // React only when the counter reaches 100 or -100
+    if (pulse_count >= 100) {
         pulse_count = 0;  // Reset counter
         printf("EARI\n");  // Step right
     }
-    if (pulse_count <= -10) {
+    if (pulse_count <= -100) {
         pulse_count = 0;  // Reset counter
         printf("EALE\n");  // Step left
     }
