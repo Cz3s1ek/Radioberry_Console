@@ -122,8 +122,6 @@ char keypad_msg[16][5] = {
 };
 
 
-int pulse_count = 0;  // Add pulse counter
-
 void ENC1_Handler() {
   int s = 0;  
   int_status = save_and_disable_interrupts();
@@ -133,21 +131,11 @@ void ENC1_Handler() {
   restore_interrupts(int_status);
   
   if(s != 0) {
-    // Count the pulses
-    pulse_count += s;
-
-    // React only when the counter reaches 100 or -100
-    if (pulse_count >= 100) {
-        pulse_count = 0;  // Reset counter
-        printf("EARI\n");  // Step right
-    }
-    if (pulse_count <= -100) {
-        pulse_count = 0;  // Reset counter
-        printf("EALE\n");  // Step left
-    }
-  }
+    //Take action here 
+    if (s == 1) {printf("EARI\n");}
+    if (s == -1) {printf("EALE\n");}
+  } 
 }
-
 void ENC2_Handler() {
   int s = 0;  
   int_status = save_and_disable_interrupts();
