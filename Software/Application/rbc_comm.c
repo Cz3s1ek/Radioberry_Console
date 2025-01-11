@@ -13,6 +13,7 @@
 
 #include <unistd.h>
 #include "button.h"
+#include "globals.h"
 
 #define DEBUG_PRINT 0
 
@@ -20,7 +21,7 @@
 /*------------------- Global Declarations -----------------*/
 int pipe_fd[2], serial_port, chcount = 0, nbytes, n;
 int sockfd, portno;
-char vcp_read_buff[256], pipe_read_buff[256], cat_buffer[50], buffer[50];
+char vcp_read_buff[256], pipe_read_buff[256], cat_buffer[50], buffer[256];
 struct hostent *server;
 struct sockaddr_in serv_addr;
 int bcat_buff = 0;
