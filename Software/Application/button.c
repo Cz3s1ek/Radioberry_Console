@@ -12,11 +12,12 @@
 
 #include<unistd.h>
 #include "button.h"
+#include "globals.h"
 
 
 
-char buffer[256], na_buff[10], nb_buff[10];
-int n, vfo_mode, filter, vfo_step, snb, anf, locked;
+char na_buff[10], nb_buff[10];
+int vfo_mode, filter, vfo_step, snb, anf, locked;
 extern int sockfd; 
 
 
