@@ -17,6 +17,7 @@
 
 #define DEBUG_PRINT 0
 
+static int enc1_count = 0;  // Pulse counter
 
 /*------------------- Global Declarations -----------------*/
 int pipe_fd[2], serial_port, chcount = 0, nbytes, n;
@@ -79,8 +80,63 @@ void* pihpsdr_cat_interface(void* arg)
 #if DEBUG_PRINT		
 		printf("Received string: %s %d\n", pipe_read_buff, nbytes);
 #endif
-		if (!strcmp(pipe_read_buff, "EARI")) {strcpy(cat_buffer,"ZZAF01;"); bcat_buff = 1;}
-		else if (!strcmp(pipe_read_buff, "EALE")) {strcpy(cat_buffer,"ZZAE01;"); bcat_buff = 1;}
+	static unsigned int enc1_threshold = 50; // Initial threshold
+    static struct timespec last_time = {0, 0};
+    struct timespec current_time;
+    double time_diff_ms;
+
+    // Get current time
+    clock_gettime(CLOCK_MONOTONIC, &current_time);
+
+    // Calculate the time difference in milliseconds
+    time_diff_ms = (current_time.tv_sec - last_time.tv_sec) * 1000.0 +
+                   (current_time.tv_nsec - last_time.tv_nsec) / 1000000.0;
+
+    // Adjust Threshold Based on Rotation Speed
+    if (time_diff_ms < 100) {          // Very fast rotation
+        enc1_threshold = 1;
+    } else if (time_diff_ms < 300) {  // Average turnover
+        enc1_threshold = 10;
+    } else {                          // Freewheeling
+        enc1_threshold = 50;
+    }
+
+    // Record the time of the current pulse
+    last_time = current_time;
+
+    // If impulse is forward movement
+    if (!strcmp(pipe_read_buff, "EARI")) {
+        enc1_count++;
+        if (enc1_count >= enc1_threshold) {
+            strcpy(cat_buffer, "ZZAF01;");
+            bcat_buff = 1;
+            enc1_count = 0; // Reset counter
+        }
+    }
+    // If the impulse is a backward movement
+    else if (!strcmp(pipe_read_buff, "EALE")) {
+        enc1_count++;
+        if (enc1_count >= enc1_threshold) {
+            strcpy(cat_buffer, "ZZAE01;");
+            bcat_buff = 1;
+            enc1_count = 0; // Reset counter
+        }
+    }
+
+
+        // We check if we have a message to send
+        if (bcat_buff) {
+            bcat_buff = 0;
+            printf("cat_buffer: %s\n", cat_buffer);
+            fflush(stdout);
+
+            // We send a message to the server
+            n = write(sockfd, cat_buffer, strlen(cat_buffer));
+            if (n < 0) {
+                perror("ERROR writing to socket");
+                exit(1);
+            }
+        }
 
 		/*-------------------- [ AF Gain Control] -----------------------*/
 		else if (!strcmp(pipe_read_buff, "EBLE")) {
