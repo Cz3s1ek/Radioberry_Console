@@ -108,7 +108,9 @@ cd..
 sudo apt install xterm
 sudo apt install wmctr
 nano /home/pi/Desktop/pihpsdr.desktop
-copy this one and paste:
+```
+copy this one and paste on pihpsdr.desktop:
+```ruby
 #!/usr/bin/env xdg-open
 [Desktop Entry]
 Version=1.0
@@ -119,12 +121,16 @@ Exec=/home/pi/start_all.sh
 #Exec=lxterminal -e /home/pi/start_all.sh
 #Exec=xterm -hold -e /home/pi/start_all.sh
 Icon=/home/pi/pihpsdr/hpsdr_icon.png
+```
 
 next
-
+```ruby
 nano start_all.sh
+```
 
-copy this:
+copy this and paste to start_all.sh:
+
+```ruby
 
 #!/bin/bash
 
@@ -146,6 +152,9 @@ wmctrl -r RBC -b add,hidden
 
 chmod +x /home/pi/start_all.sh
 ```
+### Now after click shortcut will start run piHPSDR and you have 15 sek to choice what you need run and automaticly start working console, 
+make sure you have enabled CAT on right port 19090.
+
 
 [![Radioberry_Console](https://img.youtube.com/vi/Wp12q2RIvMo/0.jpg)](https://www.youtube.com/watch?v=Wp12q2RIvMo)
 
