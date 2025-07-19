@@ -44,10 +44,13 @@ At the bottom, use appropriate PCB Receptacles Female Box Header Connector for p
 Create a directory in your raspberry pi under the /home/pi. 
 Open a command window and executing the following commands:
 ```ruby
+git clone https://github.com/WiringPi/WiringPi
+cd WiringPi
+./build
 cd /home/pi/
 mkdir rbc_main
 cd rbc_main
-git clone https://github.com/VU2DLE/Radioberry_Console.git
+git clone https://github.com/Cz3s1ek/Radioberry_Console.git
 ```
 ### Step1: Flashing the firmware
 Flashing the firmware in Pico is simple. Easy method is, if you hold down the BOOTSEL button when you plug in your Pico, it will appear as a drive onto which you can drag UF2 file. The binary file: rb_controller.uf2, is available in the folder rbc_main \Radioberry_Console\Software\Firmware\bin.
