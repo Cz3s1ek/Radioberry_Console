@@ -102,6 +102,50 @@ Now you see the following output in the command window
 /**          DE VU2DLE Dileep             **/
 /*******************************************/
 ```
+### But if you need run all from one shortcut:
+```ruby
+cd..
+sudo apt install xterm
+sudo apt install wmctr
+nano /home/pi/Desktop/pihpsdr.desktop
+copy this one and paste:
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=false
+Name=piHPSDR
+Exec=/home/pi/start_all.sh
+#Exec=lxterminal -e /home/pi/start_all.sh
+#Exec=xterm -hold -e /home/pi/start_all.sh
+Icon=/home/pi/pihpsdr/hpsdr_icon.png
+
+next
+
+nano start_all.sh
+
+copy this:
+
+#!/bin/bash
+
+# Run pihpsdr in the background
+/home/pi/pihpsdr/pihpsdr.sh &
+
+# Wait for the "pihpsdr" process to start
+while ! pgrep -f pihpsdr > /dev/null; do
+    sleep 1
+done
+
+# Wait a moment longer to make sure the GUI has booted up.
+sleep 15
+
+# Run rbc_comm
+xterm -hold -T RBC -e /home/pi/rbc_main/Radioberry_Console/Software/Application/rbc_comm &
+sleep 1
+wmctrl -r RBC -b add,hidden
+
+chmod +x /home/pi/start_all.sh
+```
 
 [![Radioberry_Console](https://img.youtube.com/vi/Wp12q2RIvMo/0.jpg)](https://www.youtube.com/watch?v=Wp12q2RIvMo)
 
