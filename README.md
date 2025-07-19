@@ -152,6 +152,8 @@ wmctrl -r RBC -b add,hidden
 
 chmod +x /home/pi/start_all.sh
 ```
+### I hope everything is understandable MI0KUJ
+
 ### Now after click shortcut will start run piHPSDR and you have 15 sek to choice what you need run and automaticly start working console, 
 make sure you have enabled CAT on right port 19090.
 
