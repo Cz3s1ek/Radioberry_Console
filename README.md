@@ -149,6 +149,9 @@ sleep 15
 xterm -hold -T RBC -e /home/pi/rbc_main/Radioberry_Console/Software/Application/rbc_comm &
 sleep 1
 wmctrl -r RBC -b add,hidden
+```
+ next
+```ruby
 
 chmod +x /home/pi/start_all.sh
 ```
