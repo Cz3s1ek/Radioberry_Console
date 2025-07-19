@@ -67,6 +67,20 @@ There are few changes I have done in the rigctl.c of the piHPSDR, which is essen
 Simple method to rebuild the piHPSDR is by editing pihpsdr_install.sh from Johan. Follow the steps of Johan for installing piHPSDR sofware.
 Before executing “sudo chmod +x pihpsdr_install.sh”, open the pihpsdr_install.sh in any editor you are familiar, then remove line “git clone https://github.com/g0orx/pihpsdr.git”. Add “git clone https://github.com/VU2DLE/pihpsdr.git”. Save and close the pihpsdr_install.sh and continue remaining steps.
 
+### OR install piHPSDR from dl1ycf :
+
+git clone https://github.com/dl1ycf/pihpsdr.git
+cd pihpsdr/LINUX
+./libinstall.sh
+
+Few minutes for install all.
+
+cd..
+cd pihpsdr
+make clean
+make
+sudo reboot
+
 ### Now software installation is completed.
 Before executing the rbc_comm, make sure that radioberry is running and also pihpsdr. In pihpsdr, goto Menu->RIGCTL. rbc_comm program communicate piHPSDR via this TCP Port number 19090. Select Rigctl Enable tick mark and Rigctl Port Number is 19090.
 
