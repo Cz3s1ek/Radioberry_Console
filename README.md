@@ -40,9 +40,10 @@ At the bottom, use appropriate PCB Receptacles Female Box Header Connector for p
 <img src="https://github.com/VU2DLE/Radioberry_Console/blob/main/Photo/PCB_V10.jpg" />
 </p>
 
-## Software Installation
+## Software Installation (moded by MI0KUJ)
 Create a directory in your raspberry pi under the /home/pi. 
 Open a command window and executing the following commands:
+(That will work with last Rspberry PI OS Bookworm)
 ```ruby
 git clone https://github.com/WiringPi/WiringPi
 cd WiringPi
