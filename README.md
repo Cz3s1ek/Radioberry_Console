@@ -75,7 +75,7 @@ cd pihpsdr/LINUX
 ./libinstall.sh
 ```
 
-###Few minutes for install all.
+### Few minutes for install all.
 ```ruby
 cd..
 cd pihpsdr
