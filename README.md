@@ -73,7 +73,7 @@ Before executing “sudo chmod +x pihpsdr_install.sh”, open the pihpsdr_instal
 git clone https://github.com/dl1ycf/pihpsdr.git
 cd pihpsdr/LINUX
 ./libinstall.sh
-...
+```
 
 ###Few minutes for install all.
 ```ruby
@@ -82,7 +82,7 @@ cd pihpsdr
 make clean
 make
 sudo reboot
-...
+```
 ### Now software installation is completed.
 Before executing the rbc_comm, make sure that radioberry is running and also pihpsdr. In pihpsdr, goto Menu->RIGCTL. rbc_comm program communicate piHPSDR via this TCP Port number 19090. Select Rigctl Enable tick mark and Rigctl Port Number is 19090.
 
