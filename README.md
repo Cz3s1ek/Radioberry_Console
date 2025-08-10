@@ -106,7 +106,7 @@ Now you see the following output in the command window
 ```ruby
 cd..
 sudo apt install xterm
-sudo apt install wmctr
+sudo apt install wmctrl
 nano /home/pi/Desktop/pihpsdr.desktop
 ```
 copy this one and paste on pihpsdr.desktop:
